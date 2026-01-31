@@ -1,0 +1,181 @@
+// App Component Styles
+@import '../styles/variables';
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: $color-bg-primary;
+}
+
+// Header
+.app-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg $spacing-md;
+  background: $color-bg-card;
+  border-bottom: 1px solid $color-border;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-size: $font-size-2xl;
+  font-weight: 700;
+  color: $color-text-primary;
+  margin: 0;
+}
+
+.title-icon {
+  font-size: 1.5em;
+}
+
+.app-tagline {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  margin-top: $spacing-xs;
+}
+
+// Error Banner
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($color-error, 0.1);
+  border-bottom: 1px solid $color-error;
+  color: $color-error;
+}
+
+.retry-btn {
+  padding: $spacing-xs $spacing-sm;
+  background: $color-error;
+  color: white;
+  border: none;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  transition: opacity $transition-fast;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// Main Content
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+// Mobile Back Button
+.mobile-back-btn {
+  display: none;
+  position: absolute;
+  top: $spacing-sm;
+  left: $spacing-sm;
+  padding: $spacing-xs $spacing-sm;
+  background: $color-bg-card;
+  color: $color-accent;
+  border: 1px solid $color-border;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  z-index: 10;
+  
+  @media (max-width: $breakpoint-mobile) {
+    display: block;
+  }
+}
+
+// Split View Layout
+.split-view {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 150px);
+}
+
+.panel {
+  overflow-y: auto;
+}
+
+.panel-list {
+  width: 35%;
+  min-width: 280px;
+  max-width: 400px;
+  background: $color-bg-card;
+  border-right: 1px solid $color-border;
+}
+
+.panel-preview {
+  flex: 1;
+  background: $color-bg-primary;
+}
+
+// Footer
+.app-footer {
+  text-align: center;
+  padding: $spacing-md;
+  background: $color-bg-card;
+  border-top: 1px solid $color-border;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}
+
+// Responsive: Tablet
+@media (max-width: $breakpoint-tablet) {
+  .panel-list {
+    width: 40%;
+    min-width: 250px;
+  }
+}
+
+// Responsive: Mobile - Stacked Layout
+@media (max-width: $breakpoint-mobile) {
+  .app-header {
+    padding: $spacing-md;
+  }
+  
+  .app-title {
+    font-size: $font-size-xl;
+  }
+  
+  .split-view {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 150px);
+  }
+  
+  .panel-list {
+    width: 100%;
+    max-width: none;
+    border-right: none;
+    border-bottom: 1px solid $color-border;
+  }
+  
+  .panel-preview {
+    display: none;
+  }
+  
+  // When showing preview on mobile
+  .split-view.show-preview {
+    .panel-list {
+      display: none;
+    }
+    
+    .panel-preview {
+      display: block;
+      padding-top: $spacing-xl;
+    }
+  }
+  
+  .hidden-mobile {
+    display: none;
+  }
+}

@@ -1,0 +1,122 @@
+// Post List Component Styles
+@import '../../../styles/variables';
+
+.post-list {
+  height: 100%;
+  overflow-y: auto;
+  padding: $spacing-md;
+}
+
+.posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-item {
+  position: relative;
+  padding: $spacing-md;
+  padding-left: $spacing-lg;
+  margin-bottom: $spacing-sm;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Left border indicator
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: $color-accent;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    border-radius: 3px;
+  }
+  
+  &:hover {
+    background: $color-hover;
+    transform: translateX(4px);
+    
+    &::before {
+      transform: scaleY(1);
+    }
+    
+    .post-title {
+      color: $color-accent;
+    }
+  }
+  
+  &:focus {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+  
+  // Active state
+  &--active {
+    background: $color-hover;
+    border-left: 3px solid $color-accent;
+    padding-left: calc(#{$spacing-lg} - 3px);
+    
+    &::before {
+      transform: scaleY(1);
+    }
+    
+    .post-title {
+      color: $color-accent;
+    }
+  }
+}
+
+.post-title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+  transition: color 0.3s ease;
+}
+
+.post-category {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Loading State
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  color: $color-text-muted;
+  
+  span {
+    margin-top: $spacing-sm;
+  }
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid $color-border;
+  border-top-color: $color-accent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: $spacing-xl;
+  color: $color-text-muted;
+}

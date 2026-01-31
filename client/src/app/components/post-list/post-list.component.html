@@ -1,0 +1,30 @@
+<nav class="post-list" aria-label="Blog posts">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-indicator">
+    <div class="loading-spinner"></div>
+    <span>Loading posts...</span>
+  </div>
+
+  <!-- Post List -->
+  <ul *ngIf="!isLoading" class="posts">
+    <li
+      *ngFor="let post of posts; trackBy: trackByPostId"
+      class="post-item"
+      [class.post-item--active]="isSelected(post)"
+      (click)="onSelectPost(post)"
+      (keyup.enter)="onSelectPost(post)"
+      tabindex="0"
+      role="button"
+      [attr.aria-pressed]="isSelected(post)"
+      [attr.aria-label]="'Read ' + post.title"
+    >
+      <div class="post-title">{{ post.title }}</div>
+      <div *ngIf="post.category" class="post-category">{{ post.category }}</div>
+    </li>
+  </ul>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && posts.length === 0" class="empty-state">
+    <p>No posts available</p>
+  </div>
+</nav>

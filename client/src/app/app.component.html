@@ -1,0 +1,55 @@
+<div class="app-container">
+  <!-- Header -->
+  <header class="app-header">
+    <h1 class="app-title">
+      <span class="title-icon">📖</span>
+      {{ title }}
+    </h1>
+    <p class="app-tagline">Explore curated thoughts</p>
+  </header>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-banner">
+    <span>{{ errorMessage }}</span>
+    <button class="retry-btn" (click)="onRetry()">Retry</button>
+  </div>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <!-- Mobile Back Button -->
+    <button
+      *ngIf="showMobilePreview"
+      class="mobile-back-btn"
+      (click)="onMobileBack()"
+      aria-label="Back to post list"
+    >
+      ← Back
+    </button>
+
+    <!-- Split View Container -->
+    <div class="split-view" [class.show-preview]="showMobilePreview">
+      <!-- Left Panel: Post List -->
+      <aside class="panel panel-list" [class.hidden-mobile]="showMobilePreview">
+        <app-post-list
+          [posts]="posts"
+          [selectedPostId]="selectedPost?.id ?? null"
+          [isLoading]="isLoading"
+          (postSelected)="onPostSelected($event)"
+        ></app-post-list>
+      </aside>
+
+      <!-- Right Panel: Post Preview -->
+      <section
+        class="panel panel-preview"
+        [class.hidden-mobile]="!showMobilePreview && selectedPost === null"
+      >
+        <app-post-preview [post]="selectedPost"></app-post-preview>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>Built with the MEAN Stack • Portfolio Demo</p>
+  </footer>
+</div>

@@ -1,0 +1,28 @@
+<article class="post-preview" *ngIf="post; else emptyState" [@fadeIn]>
+  <!-- Post Header -->
+  <header class="post-header">
+    <span *ngIf="post.category" class="post-category">{{ post.category }}</span>
+    <h1 class="post-title">{{ post.title }}</h1>
+    <time
+      *ngIf="post.createdAt"
+      class="post-date"
+      [attr.datetime]="post.createdAt"
+    >
+      {{ formatDate(post.createdAt) }}
+    </time>
+  </header>
+
+  <!-- Post Content -->
+  <div class="post-content">
+    <p>{{ post.description }}</p>
+  </div>
+</article>
+
+<!-- Empty State: No post selected -->
+<ng-template #emptyState>
+  <div class="empty-preview">
+    <div class="empty-icon">📖</div>
+    <h2>Select a post to read</h2>
+    <p>Choose a blog post from the list to see its content here.</p>
+  </div>
+</ng-template>
